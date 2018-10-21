@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-import os, sys
+import os, sys,unittest
 
 BUILDINFUNCTIONS = ["unittest"]
 
@@ -79,6 +79,12 @@ class ClassDiscover(object):
         self.get_class_name()
         return self.test_suite
 
-#discover("/Users/datagrand/test/classloader/unittestcase", 'test', 'test_')
-a = ClassDiscover("/Users/datagrand/test/classloader/unittestcase", "test", "test")
-print a.discover()
+    def loadTest(self):
+        self.discover()
+        runner = unittest.TextTestRunner()
+        for suite in self.test_suite:
+            runner.run(suite)
+
+
+a = ClassDiscover("/Users/datagrand/test/classloader/unittestcase", "rfq", "rfq")
+print a.loadTest()
